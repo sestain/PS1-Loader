@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	This file is processed by CMake and used by mkpsxiso to build the CD image.
+
+	NOTE: all paths are relative to the build directory; if you want to include
+	a file from the source tree, you'll have to prepend its path with
+	${PROJECT_SOURCE_DIR}.
+-->
+<iso_project
+	image_name="${CD_IMAGE_NAME}.bin"
+	cue_sheet="${CD_IMAGE_NAME}.cue"
+>
+	<track type="data">
+		<!--
+			The "volume", "volume_set", "publisher", "data_preparer" and
+			"copyright" strings below can be freely modified. The ISO9660
+			specification, however, imposes the following limitations:
+
+			- "volume" and "volume_set" must be 32 characters or less, and can
+			  only contain uppercase letters, digits and underscores.
+			- "publisher" and "data_preparer" can be up to 128 characters long
+			  and can additionally contain spaces and some special characters.
+			- "copyright" should be a path to a file on the disc, even one that
+			  does not exist (but in practice it can be set to anything).
+
+			"system" and "application" must always be set to "PLAYSTATION" in
+			order for the disc to be recognized as valid.
+		-->
+		<identifiers
+			system			="PLAYSTATION"
+			volume			="BOOTLEG_LOADER"
+			volume_set		="BOOTLEG_LOADER"
+			publisher		="SESTAIN"
+			data_preparer	="PSN00BSDK ${PSN00BSDK_VERSION}"
+			application		="PLAYSTATION"
+			copyright		="README.TXT;1"
+		/>
+
+		<!--
+			You may optionally include a license file using the <license> tag.
+			Some consoles, particularly Japanese or PAL models with a modchip,
+			require the disc to contain valid license data and will refuse to
+			boot if it is missing. License files are usually not required on
+			US consoles or when booting via softmods or cheat cartridges.
+
+			License files are region-specific and are not distributed with
+			PSn00bSDK for obvious reasons, but can be dumped from an official
+			game using dumpsxiso or extracted from the Sony SDK.
+		-->
+		<!--<license file="${PROJECT_SOURCE_DIR}/license.dat" />-->
+
+		<!--
+			Files and directories can be added to the disc by placing <file>
+			and <dir> tags below. All file names are case-insensitive and must
+			be in 8.3 format, i.e. no more than 8 characters for the name and 3
+			for the optional extension. Directories cannot have extensions.
+
+			A boot configuration file (SYSTEM.CNF) or executable (PSX.EXE) must
+			be present in the root directory. Due to BIOS limitations the root
+			directory cannot hold more than 30 files or directories, and the
+			entire disc must contain 45 directories or less. Subdirectories can
+			contain any number of files.
+		-->
+		<directory_tree>
+			<file name="SYSTEM.CNF"		type="data" source="${PROJECT_SOURCE_DIR}/system.cnf" />
+			<file name="LOADER.EXE"		type="data" source="cppdemo.exe" />
+			<!-- <file name="BIGFILE.BIG"	type="data" source="${PROJECT_SOURCE_DIR}/files/bigfile.big" /> -->
+			
+			<dir name="LOADS">
+				<file name="CRASH1.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crash1.exe" />
+				<file name="CRASH2.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crash2.exe" />
+				<file name="CRASH3.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crash3.exe" />
+				<file name="BASH.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crashbash.exe" />
+				<!-- <file name="CTR.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/ctr.exe" /> -->
+			</dir>
+
+			<dir name="CRASHBSH">
+				<file name="CRASHBSH.DAT" type="data" source="${PROJECT_SOURCE_DIR}/files/CRASHBSH/CRASHBSH.DAT" />
+			</dir>
+
+			<!--
+				<dir name="SOUNDS">
+					<file name="KART.HWL" type="data" source="${PROJECT_SOURCE_DIR}/files/sounds/KART.HWL" />
+				</dir>
+
+				<dir name="XA">
+					<dir name="ENG">
+						<dir name="EXTRA">
+							<file name="S00.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S00.xa" />
+							<file name="S01.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S01.xa" />
+							<file name="S02.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S02.xa" />
+							<file name="S03.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S03.xa" />
+							<file name="S04.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S04.xa" />
+							<file name="S05.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S05.xa" />
+						</dir>
+						<dir name="GAME">
+							<file name="S00.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S00.xa" />
+							<file name="S01.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S01.xa" />
+							<file name="S02.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S02.xa" />
+							<file name="S03.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S03.xa" />
+							<file name="S04.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S04.xa" />
+							<file name="S05.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S05.xa" />
+							<file name="S06.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S06.xa" />
+							<file name="S07.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S07.xa" />
+							<file name="S08.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S08.xa" />
+							<file name="S09.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S09.xa" />
+							<file name="S10.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S10.xa" />
+							<file name="S11.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S11.xa" />
+							<file name="S12.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S12.xa" />
+							<file name="S13.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S13.xa" />
+							<file name="S14.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S14.xa" />
+							<file name="S15.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S15.xa" />
+							<file name="S16.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S16.xa" />
+							<file name="S17.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S17.xa" />
+							<file name="S18.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S18.xa" />
+							<file name="S19.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S19.xa" />
+							<file name="S20.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S20.xa" />
+						</dir>
+					</dir>
+					<dir name="MUSIC">
+						<file name="S00.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/music/S00.xa" />
+						<file name="S01.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/music/S01.xa" />
+					</dir>
+					<file name="ENG.XNF" type="data" source="${PROJECT_SOURCE_DIR}/files/xa/ENG.XNF" />
+				</dir>
+			-->
+			
+			<dir name="R0">
+				<file name="S000000A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000A.NSD" />
+				<file name="S000000A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000A.NSF" />
+				<file name="S000000C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000C.NSD" />
+				<file name="S000000C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000C.NSF" />
+				<file name="S000000E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000E.NSD" />
+				<file name="S000000E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000E.NSF" />
+				<file name="S000000F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000F.NSD" />
+				<file name="S000000F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000F.NSF" />
+				<file name="S0000003.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000003.NSD" />
+				<file name="S0000003.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000003.NSF" />
+				<file name="S0000004.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000004.NSD" />
+				<file name="S0000004.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000004.NSF" />
+				<file name="S0000005.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000005.NSD" />
+				<file name="S0000005.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000005.NSF" />
+				<file name="S0000006.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000006.NSD" />
+				<file name="S0000006.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000006.NSF" />
+				<file name="S0000007.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000007.NSD" />
+				<file name="S0000007.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000007.NSF" />
+				<file name="S0000008.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000008.NSD" />
+				<file name="S0000008.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000008.NSF" />
+				<file name="S0000009.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000009.NSD" />
+				<file name="S0000009.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S0000009.NSF" />
+			</dir>
+
+			<dir name="R1">
+				<file name="S000001A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001A.NSD" />
+				<file name="S000001A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001A.NSF" />
+				<file name="S000001B.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001B.NSD" />
+				<file name="S000001B.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001B.NSF" />
+				<file name="S000001C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001C.NSD" />
+				<file name="S000001C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001C.NSF" />
+				<file name="S000001D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001D.NSD" />
+				<file name="S000001D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001D.NSF" />
+				<file name="S000001E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001E.NSD" />
+				<file name="S000001E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001E.NSF" />
+				<file name="S000001F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001F.NSD" />
+				<file name="S000001F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S000001F.NSF" />
+				<file name="S0000011.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000011.NSD" />
+				<file name="S0000011.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000011.NSF" />
+				<file name="S0000012.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000012.NSD" />
+				<file name="S0000012.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000012.NSF" />
+				<file name="S0000013.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000013.NSD" />
+				<file name="S0000013.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000013.NSF" />
+				<file name="S0000014.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000014.NSD" />
+				<file name="S0000014.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000014.NSF" />
+				<file name="S0000015.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000015.NSD" />
+				<file name="S0000015.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000015.NSF" />
+				<file name="S0000016.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000016.NSD" />
+				<file name="S0000016.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000016.NSF" />
+				<file name="S0000017.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000017.NSD" />
+				<file name="S0000017.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000017.NSF" />
+				<file name="S0000018.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000018.NSD" />
+				<file name="S0000018.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000018.NSF" />
+				<file name="S0000019.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000019.NSD" />
+				<file name="S0000019.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R1/S0000019.NSF" />
+			</dir>
+
+			<dir name="R2">
+				<file name="S000002A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002A.NSD" />
+				<file name="S000002A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002A.NSF" />
+				<file name="S000002C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002C.NSD" />
+				<file name="S000002C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002C.NSF" />
+				<file name="S000002D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002D.NSD" />
+				<file name="S000002D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002D.NSF" />
+				<file name="S000002E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002E.NSD" />
+				<file name="S000002E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S000002E.NSF" />
+				<file name="S0000020.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000020.NSD" />
+				<file name="S0000020.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000020.NSF" />
+				<file name="S0000021.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000021.NSD" />
+				<file name="S0000021.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000021.NSF" />
+				<file name="S0000022.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000022.NSD" />
+				<file name="S0000022.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000022.NSF" />
+				<file name="S0000023.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000023.NSD" />
+				<file name="S0000023.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000023.NSF" />
+				<file name="S0000024.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000024.NSD" />
+				<file name="S0000024.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000024.NSF" />
+				<file name="S0000025.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000025.NSD" />
+				<file name="S0000025.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000025.NSF" />
+				<file name="S0000026.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000026.NSD" />
+				<file name="S0000026.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000026.NSF" />
+				<file name="S0000028.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000028.NSD" />
+				<file name="S0000028.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000028.NSF" />
+				<file name="S0000029.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000029.NSD" />
+				<file name="S0000029.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R2/S0000029.NSF" />
+			</dir>
+
+			<dir name="R3">
+				<file name="S0000033.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000033.NSD" />
+				<file name="S0000033.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000033.NSF" />
+				<file name="S0000034.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000034.NSD" />
+				<file name="S0000034.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000034.NSF" />
+				<file name="S0000037.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000037.NSD" />
+				<file name="S0000037.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000037.NSF" />
+				<file name="S0000038.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000038.NSD" />
+				<file name="S0000038.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000038.NSF" />
+				<file name="S0000039.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000039.NSD" />
+				<file name="S0000039.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/R3/S0000039.NSF" />
+			</dir>
+
+			<dir name="S0">
+				<file name="S000000A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000A.NSD" />
+				<file name="S000000A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000A.NSF" />
+				<file name="S000000B.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000B.NSD" />
+				<file name="S000000B.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000B.NSF" />
+				<file name="S000000C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000C.NSD" />
+				<file name="S000000C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000C.NSF" />
+				<file name="S000000D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000D.NSD" />
+				<file name="S000000D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000D.NSF" />
+				<file name="S000000E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000E.NSD" />
+				<file name="S000000E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000E.NSF" />
+				<file name="S000000F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000F.NSD" />
+				<file name="S000000F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000F.NSF" />
+				<file name="S0000002.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000002.NSD" />
+				<file name="S0000002.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000002.NSF" />
+				<file name="S0000003.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000003.NSD" />
+				<file name="S0000003.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000003.NSF" />
+				<file name="S0000004.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000004.NSD" />
+				<file name="S0000004.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000004.NSF" />
+				<file name="S0000005.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000005.NSD" />
+				<file name="S0000005.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000005.NSF" />
+				<file name="S0000006.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000006.NSD" />
+				<file name="S0000006.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000006.NSF" />
+				<file name="S0000007.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000007.NSD" />
+				<file name="S0000007.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000007.NSF" />
+				<file name="WARPSCUS.BIN" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/WARPSCUS.BIN" />
+			</dir>
+
+			<dir name="S1">
+				<file name="S000001A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001A.NSD" />
+				<file name="S000001A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001A.NSF" />
+				<file name="S000001B.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001B.NSD" />
+				<file name="S000001B.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001B.NSF" />
+				<file name="S000001C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001C.NSD" />
+				<file name="S000001C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001C.NSF" />
+				<file name="S000001D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001D.NSD" />
+				<file name="S000001D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001D.NSF" />
+				<file name="S000001E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001E.NSD" />
+				<file name="S000001E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S000001E.NSF" />
+				<file name="S0000010.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000010.NSD" />
+				<file name="S0000010.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000010.NSF" />
+				<file name="S0000011.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000011.NSD" />
+				<file name="S0000011.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000011.NSF" />
+				<file name="S0000012.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000012.NSD" />
+				<file name="S0000012.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000012.NSF" />
+				<file name="S0000013.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000013.NSD" />
+				<file name="S0000013.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000013.NSF" />
+				<file name="S0000014.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000014.NSD" />
+				<file name="S0000014.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000014.NSF" />
+				<file name="S0000015.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000015.NSD" />
+				<file name="S0000015.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000015.NSF" />
+				<file name="S0000016.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000016.NSD" />
+				<file name="S0000016.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000016.NSF" />
+				<file name="S0000017.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000017.NSD" />
+				<file name="S0000017.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000017.NSF" />
+				<file name="S0000018.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000018.NSD" />
+				<file name="S0000018.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000018.NSF" />
+				<file name="S0000019.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000019.NSD" />
+				<file name="S0000019.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S1/S0000019.NSF" />
+			</dir>
+
+			<dir name="S2">
+				<file name="S000001F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S000001F.NSD" />
+				<file name="S000001F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S000001F.NSF" />
+				<file name="S000002A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S000002A.NSD" />
+				<file name="S000002A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S000002A.NSF" />
+				<file name="S0000020.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000020.NSD" />
+				<file name="S0000020.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000020.NSF" />
+				<file name="S0000021.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000021.NSD" />
+				<file name="S0000021.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000021.NSF" />
+				<file name="S0000022.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000022.NSD" />
+				<file name="S0000022.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000022.NSF" />
+				<file name="S0000023.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000023.NSD" />
+				<file name="S0000023.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000023.NSF" />
+				<file name="S0000024.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000024.NSD" />
+				<file name="S0000024.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000024.NSF" />
+				<file name="S0000025.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000025.NSD" />
+				<file name="S0000025.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000025.NSF" />
+				<file name="S0000026.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000026.NSD" />
+				<file name="S0000026.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000026.NSF" />
+				<file name="S0000027.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000027.NSD" />
+				<file name="S0000027.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000027.NSF" />
+				<file name="S0000028.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000028.NSD" />
+				<file name="S0000028.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000028.NSF" />
+				<file name="S0000029.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000029.NSD" />
+				<file name="S0000029.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S2/S0000029.NSF" />
+			</dir>
+
+			<dir name="S3">
+				<file name="S000003A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S3/S000003A.NSD" />
+				<file name="S000003A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S3/S000003A.NSF" />
+				<file name="S000003B.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S3/S000003B.NSD" />
+				<file name="S000003B.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S3/S000003B.NSF" />
+				<file name="S000003C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S3/S000003C.NSD" />
+				<file name="S000003C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S3/S000003C.NSF" />
+			</dir>
+
+			<dir name="U0">
+				<file name="S000000A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000A.NSD" />
+				<file name="S000000A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000A.NSF" />
+				<file name="S000000C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000C.NSD" />
+				<file name="S000000C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000C.NSF" />
+				<file name="S000000D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000D.NSD" />
+				<file name="S000000D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000D.NSF" />
+				<file name="S000000E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000E.NSD" />
+				<file name="S000000E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000E.NSF" />
+				<file name="S000000F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000F.NSD" />
+				<file name="S000000F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000F.NSF" />
+				<file name="S0000002.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000002.NSD" />
+				<file name="S0000002.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000002.NSF" />
+				<file name="S0000003.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000003.NSD" />
+				<file name="S0000003.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000003.NSF" />
+				<file name="S0000006.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000006.NSD" />
+				<file name="S0000006.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000006.NSF" />
+				<file name="S0000007.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000007.NSD" />
+				<file name="S0000007.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000007.NSF" />
+				<file name="S0000008.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000008.NSD" />
+				<file name="S0000008.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000008.NSF" />
+				<file name="S0000009.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000009.NSD" />
+				<file name="S0000009.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000009.NSF" />
+			</dir>
+
+			<dir name="U1">
+				<file name="S000001A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001A.NSD" />
+				<file name="S000001A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001A.NSF" />
+				<file name="S000001B.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001B.NSD" />
+				<file name="S000001B.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001B.NSF" />
+				<file name="S000001C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001C.NSD" />
+				<file name="S000001C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001C.NSF" />
+				<file name="S000001D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001D.NSD" />
+				<file name="S000001D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001D.NSF" />
+				<file name="S000001E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001E.NSD" />
+				<file name="S000001E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001E.NSF" />
+				<file name="S000001F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001F.NSD" />
+				<file name="S000001F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S000001F.NSF" />
+				<file name="S0000010.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000010.NSD" />
+				<file name="S0000010.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000010.NSF" />
+				<file name="S0000011.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000011.NSD" />
+				<file name="S0000011.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000011.NSF" />
+				<file name="S0000012.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000012.NSD" />
+				<file name="S0000012.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000012.NSF" />
+				<file name="S0000013.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000013.NSD" />
+				<file name="S0000013.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000013.NSF" />
+				<file name="S0000015.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000015.NSD" />
+				<file name="S0000015.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000015.NSF" />
+				<file name="S0000016.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000016.NSD" />
+				<file name="S0000016.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000016.NSF" />
+				<file name="S0000017.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000017.NSD" />
+				<file name="S0000017.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000017.NSF" />
+				<file name="S0000018.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000018.NSD" />
+				<file name="S0000018.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000018.NSF" />
+				<file name="S0000019.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000019.NSD" />
+				<file name="S0000019.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U1/S0000019.NSF" />
+			</dir>
+
+			<dir name="U2">
+				<file name="S000002D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S000002D.NSD" />
+				<file name="S000002D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S000002D.NSF" />
+				<file name="S000002E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S000002E.NSD" />
+				<file name="S000002E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S000002E.NSF" />
+				<file name="S000002F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S000002F.NSD" />
+				<file name="S000002F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S000002F.NSF" />
+				<file name="S0000020.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000020.NSD" />
+				<file name="S0000020.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000020.NSF" />
+				<file name="S0000021.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000021.NSD" />
+				<file name="S0000021.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000021.NSF" />
+				<file name="S0000022.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000022.NSD" />
+				<file name="S0000022.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000022.NSF" />
+				<file name="S0000023.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000023.NSD" />
+				<file name="S0000023.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000023.NSF" />
+				<file name="S0000024.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000024.NSD" />
+				<file name="S0000024.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000024.NSF" />
+				<file name="S0000025.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000025.NSD" />
+				<file name="S0000025.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000025.NSF" />
+				<file name="S0000026.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000026.NSD" />
+				<file name="S0000026.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000026.NSF" />
+				<file name="S0000027.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000027.NSD" />
+				<file name="S0000027.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000027.NSF" />
+				<file name="S0000028.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000028.NSD" />
+				<file name="S0000028.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000028.NSF" />
+				<file name="S0000029.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000029.NSD" />
+				<file name="S0000029.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U2/S0000029.NSF" />
+			</dir>
+
+			<dir name="U3">
+				<file name="S000003B.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S000003B.NSD" />
+				<file name="S000003B.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S000003B.NSF" />
+				<file name="S000003C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S000003C.NSD" />
+				<file name="S000003C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S000003C.NSF" />
+				<file name="S0000030.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S0000030.NSD" />
+				<file name="S0000030.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S0000030.NSF" />
+			</dir>
+			
+			<!--
+				This file is only required if you are using dynamic linking
+				(see the system/dynlink example). It contains the executable's
+				symbol map and can be used to obtain the address of a function
+				or global variable by its name.
+			-->
+			<!--<file name="TEMPLATE.MAP"	type="data" source="template.map" />-->
+
+			<!-- <dummy>
+				Specifies an invisible dummy file to be generated into the file system. Use this to
+				add dummy sectors, usually at the end of the file system portion of the image to avoid
+				the possibility of 'drive runaway' which can damage a drive mechanism.
+				
+				The dummy file is completely invisible as it is not added into the directory records
+				of the ISO image entirely which ensures a clean directory structure when the file system is
+				viewed on a file browser.
+				
+				Attributes:
+					sectors	- Size of dummy file in sector units (1024 = 2MB).
+			-->
+			<dummy sectors="1024"/>
+		</directory_tree>
+	</track>
+
+	<!--
+		CD-DA tracks can be added to the CD image by using one or more <track>
+		tags. The source attribute must be a path to an audio file in WAV, FLAC
+		or MP3 format (using WAV or FLAC is highly recommended to preserve
+		audio quality if you have a lossless copy of the source track).
+	-->
+	<!--<track type="audio" source="${PROJECT_SOURCE_DIR}/track2.wav" />-->
+</iso_project>

@@ -47,7 +47,7 @@
 			PSn00bSDK for obvious reasons, but can be dumped from an official
 			game using dumpsxiso or extracted from the Sony SDK.
 		-->
-		<!--<license file="${PROJECT_SOURCE_DIR}/license.dat" />-->
+		<license file="${PROJECT_SOURCE_DIR}/licensea.dat" />
 
 		<!--
 			Files and directories can be added to the disc by placing <file>
@@ -323,24 +323,24 @@
 			</dir>
 
 			<dir name="U0">
-				<file name="S000000A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000A.NSD" />
-				<file name="S000000A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000A.NSF" />
-				<file name="S000000C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000C.NSD" />
-				<file name="S000000C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000C.NSF" />
-				<file name="S000000D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000D.NSD" />
-				<file name="S000000D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000D.NSF" />
-				<file name="S000000E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000E.NSD" />
-				<file name="S000000E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000E.NSF" />
-				<file name="S000000F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000F.NSD" />
-				<file name="S000000F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S000000F.NSF" />
-				<file name="S0000002.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000002.NSD" />
-				<file name="S0000002.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000002.NSF" />
-				<file name="S0000003.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000003.NSD" />
-				<file name="S0000003.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000003.NSF" />
-				<file name="S0000006.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000006.NSD" />
-				<file name="S0000006.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000006.NSF" />
-				<file name="S0000007.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000007.NSD" />
-				<file name="S0000007.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/S0/S0000007.NSF" />
+				<file name="S000000A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000A.NSD" />
+				<file name="S000000A.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000A.NSF" />
+				<file name="S000000C.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000C.NSD" />
+				<file name="S000000C.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000C.NSF" />
+				<file name="S000000D.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000D.NSD" />
+				<file name="S000000D.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000D.NSF" />
+				<file name="S000000E.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000E.NSD" />
+				<file name="S000000E.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000E.NSF" />
+				<file name="S000000F.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000F.NSD" />
+				<file name="S000000F.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S000000F.NSF" />
+				<file name="S0000002.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000002.NSD" />
+				<file name="S0000002.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000002.NSF" />
+				<file name="S0000003.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000003.NSD" />
+				<file name="S0000003.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000003.NSF" />
+				<file name="S0000006.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000006.NSD" />
+				<file name="S0000006.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000006.NSF" />
+				<file name="S0000007.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000007.NSD" />
+				<file name="S0000007.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000007.NSF" />
 				<file name="S0000008.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000008.NSD" />
 				<file name="S0000008.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000008.NSF" />
 				<file name="S0000009.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U0/S0000009.NSD" />
@@ -436,7 +436,7 @@
 				viewed on a file browser.
 				
 				Attributes:
-					sectors	- Size of dummy file in sector units (1024 = 2MB).
+					sectors	- Size of dummy file in sector units (1024 = 2MB, 8192 = 16MB).
 			-->
 			<dummy sectors="1024"/>
 		</directory_tree>

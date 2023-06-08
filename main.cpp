@@ -201,6 +201,7 @@ void display(void)
 int main( int argc, const char *argv[] )
 {
 	const char* filename = "none";
+	const char* game = "none";
 	int executing = 0;
 
 	init();
@@ -217,7 +218,7 @@ int main( int argc, const char *argv[] )
 
 		FntPrint(-1, "Welcome to Sestain's bootleg loader\n\n");
 
-		FntPrint(-1, "Selected: %s\n", filename);
+		FntPrint(-1, "Selected: %s\n", game);
 
 		FntPrint(-1, "Press start to boot game\n");
 
@@ -234,22 +235,27 @@ int main( int argc, const char *argv[] )
 			{
 				if (!(pad->btn & PAD_CROSS))
 				{
+					game = "Crash 1";
 					filename = "\\LOADS\\CRASH1.EXE;1";
 				}
 				if (!(pad->btn & PAD_CIRCLE))
 				{
+					game = "Crash 2";
 					filename = "\\LOADS\\CRASH2.EXE;1";
 				}
 				if (!(pad->btn & PAD_TRIANGLE))
 				{
+					game = "Crash 3";
 					filename = "\\LOADS\\CRASH3.EXE;1";
 				}
 				if (!(pad->btn & PAD_SQUARE))
 				{
+					game = "Crash Bash";
 					filename = "\\LOADS\\BASH.EXE;1";
 				}
 				//if (!(pad->btn & PAD_SELECT))
 				//{
+				//	game = "CTR";
 				//	filename = "\\LOADS\\CTR.EXE;1";
 				//}
 
@@ -262,7 +268,7 @@ int main( int argc, const char *argv[] )
 		}
 		
 		if (executing > 0)
-			FntPrint(-1, "Executing: %s\n", filename);
+			FntPrint(-1, "Executing: %s\n", game);
 
 		// Draw the last created text stream
 		FntFlush(-1);

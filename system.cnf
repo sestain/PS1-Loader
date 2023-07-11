@@ -1,4 +1,4 @@
-BOOT = cdrom:\loader.exe;1
+BOOT = cdrom:\LOADER.EXE;1
 TCB = 4
 EVENT = 16
 STACK = 801FFFF0

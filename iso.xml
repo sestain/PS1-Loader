@@ -47,7 +47,7 @@
 			PSn00bSDK for obvious reasons, but can be dumped from an official
 			game using dumpsxiso or extracted from the Sony SDK.
 		-->
-		<license file="${PROJECT_SOURCE_DIR}/licensea.dat" />
+		<license file="${PROJECT_SOURCE_DIR}/licensee.dat" />
 
 		<!--
 			Files and directories can be added to the disc by placing <file>
@@ -64,66 +64,17 @@
 		<directory_tree>
 			<file name="SYSTEM.CNF"		type="data" source="${PROJECT_SOURCE_DIR}/system.cnf" />
 			<file name="LOADER.EXE"		type="data" source="cppdemo.exe" />
-			<!-- <file name="BIGFILE.BIG"	type="data" source="${PROJECT_SOURCE_DIR}/files/bigfile.big" /> -->
 			
 			<dir name="LOADS">
-				<file name="CRASH1.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crash1.exe" />
-				<file name="CRASH2.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crash2.exe" />
-				<file name="CRASH3.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crash3.exe" />
-				<file name="BASH.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/crashbash.exe" />
-				<!-- <file name="CTR.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/ctr.exe" /> -->
+				<file name="CRASH1.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/CRASH1.EXE" />
+				<file name="CRASH2.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/CRASH2.EXE" />
+				<file name="CRASH3.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/CRASH3.EXE" />
+				<file name="BASH.EXE"		type="data" source="${PROJECT_SOURCE_DIR}/CRASHBASH.EXE" />
 			</dir>
 
 			<dir name="CRASHBSH">
 				<file name="CRASHBSH.DAT" type="data" source="${PROJECT_SOURCE_DIR}/files/CRASHBSH/CRASHBSH.DAT" />
 			</dir>
-
-			<!--
-				<dir name="SOUNDS">
-					<file name="KART.HWL" type="data" source="${PROJECT_SOURCE_DIR}/files/sounds/KART.HWL" />
-				</dir>
-
-				<dir name="XA">
-					<dir name="ENG">
-						<dir name="EXTRA">
-							<file name="S00.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S00.xa" />
-							<file name="S01.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S01.xa" />
-							<file name="S02.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S02.xa" />
-							<file name="S03.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S03.xa" />
-							<file name="S04.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S04.xa" />
-							<file name="S05.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/extra/S05.xa" />
-						</dir>
-						<dir name="GAME">
-							<file name="S00.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S00.xa" />
-							<file name="S01.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S01.xa" />
-							<file name="S02.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S02.xa" />
-							<file name="S03.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S03.xa" />
-							<file name="S04.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S04.xa" />
-							<file name="S05.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S05.xa" />
-							<file name="S06.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S06.xa" />
-							<file name="S07.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S07.xa" />
-							<file name="S08.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S08.xa" />
-							<file name="S09.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S09.xa" />
-							<file name="S10.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S10.xa" />
-							<file name="S11.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S11.xa" />
-							<file name="S12.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S12.xa" />
-							<file name="S13.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S13.xa" />
-							<file name="S14.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S14.xa" />
-							<file name="S15.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S15.xa" />
-							<file name="S16.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S16.xa" />
-							<file name="S17.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S17.xa" />
-							<file name="S18.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S18.xa" />
-							<file name="S19.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S19.xa" />
-							<file name="S20.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/eng/game/S20.xa" />
-						</dir>
-					</dir>
-					<dir name="MUSIC">
-						<file name="S00.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/music/S00.xa" />
-						<file name="S01.XA" type="xa" source="${PROJECT_SOURCE_DIR}/files/xa/music/S01.xa" />
-					</dir>
-					<file name="ENG.XNF" type="data" source="${PROJECT_SOURCE_DIR}/files/xa/ENG.XNF" />
-				</dir>
-			-->
 			
 			<dir name="R0">
 				<file name="S000000A.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/R0/S000000A.NSD" />
@@ -417,14 +368,6 @@
 				<file name="S0000030.NSD" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S0000030.NSD" />
 				<file name="S0000030.NSF" type="data" source="${PROJECT_SOURCE_DIR}/files/U3/S0000030.NSF" />
 			</dir>
-			
-			<!--
-				This file is only required if you are using dynamic linking
-				(see the system/dynlink example). It contains the executable's
-				symbol map and can be used to obtain the address of a function
-				or global variable by its name.
-			-->
-			<!--<file name="TEMPLATE.MAP"	type="data" source="template.map" />-->
 
 			<!-- <dummy>
 				Specifies an invisible dummy file to be generated into the file system. Use this to

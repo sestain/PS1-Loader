@@ -96,12 +96,11 @@ bool launchExecutable(const char *path, int maxAttempts) {
 }
 
 // Define display/draw environments for double buffering
-DISPENV disp[2];
-DRAWENV draw[2];
-int db;
+DISPENV disp;
+DRAWENV draw;
+int db = 0;
 
-#define OTLEN 8         // Ordering table length (recommended to set as a define
-// so it can be changed easily)
+#define OTLEN 8         // Ordering table length (recommended to set as a define so it can be changed easily)
 
 // Define variables for controllers
 u_long ot[2][OTLEN];    // Ordering table length
@@ -130,39 +129,31 @@ char* nextpri;          // Next primitive pointer
 u_char padbuff[2][34];
 
 // Init function
-void init(void)
-{
+void init(void) {
 	// This not only resets the GPU but it also installs the library's
 	// ISR subsystem to the kernel
 	ResetGraph(0);
 	CdInit();
 
-	// Define display environments, first on top and second on bottom
-	SetDefDispEnv(&disp[0], 0, 0, 320, 240);
-	SetDefDispEnv(&disp[1], 0, 240, 320, 240);
-
-	// Define drawing environments, first on bottom and second on top
-	SetDefDrawEnv(&draw[0], 0, 240, 320, 240);
-	SetDefDrawEnv(&draw[1], 0, 0, 320, 240);
+	SetDefDispEnv( &disp, 0, 0, 320, 240 );
+	SetDefDrawEnv( &draw, 0, 0, 320, 240 );
 
 	// Set and enable clear color
-	setRGB0(&draw[0], 0, 0, 0);
-	setRGB0(&draw[1], 0, 0, 0);
-	draw[0].isbg = 1;
-	draw[1].isbg = 1;
+	setRGB0( &draw, 0, 0, 0 );
+	draw.isbg = 1;
+	draw.dtd = 1;
 
 	// Clear double buffer counter
-	db = 0;
 	nextpri = pribuff[0];           // Set initial primitive pointer address
 
 	// Apply the GPU environments
-	PutDispEnv(&disp[db]);
-	PutDrawEnv(&draw[db]);
+	PutDispEnv( &disp );
+	PutDrawEnv( &draw );
 
 	// Load test font
 	FntLoad(960, 0);
 
-	// Open up a test font text stream of 100 characters
+	// Open up a test font text stream
 	FntOpen(0, 8, 320, 224, 0, 200);
 
 	// Initialize the pads
@@ -176,8 +167,7 @@ void init(void)
 }
 
 // Display function
-void display(void)
-{
+void display(void) {
 	// Flip buffer index
 	db = !db;
 	nextpri = pribuff[db];      // Reset next primitive pointer
@@ -190,16 +180,14 @@ void display(void)
 	VSync(0);
 
 	// Switch pages	
-	PutDispEnv(&disp[db]);
-	PutDrawEnv(&draw[db]);
+	PutDispEnv(&disp);
+	PutDrawEnv(&draw);
 
 	// Enable display output, ResetGraph() disables it by default
 	SetDispMask(1);
-
 }
 
-int main( int argc, const char *argv[] )
-{
+int main( int argc, const char *argv[] ) {
 	const char* filename = "none";
 	const char* game = "none";
 	int executing = 0;
@@ -253,11 +241,6 @@ int main( int argc, const char *argv[] )
 					game = "Crash Bash";
 					filename = "\\LOADS\\BASH.EXE;1";
 				}
-				//if (!(pad->btn & PAD_SELECT))
-				//{
-				//	game = "CTR";
-				//	filename = "\\LOADS\\CTR.EXE;1";
-				//}
 
 				if (!(pad->btn & PAD_START)) {
 					if (!(filename == "none") && !(executing == 2)) {
@@ -278,5 +261,4 @@ int main( int argc, const char *argv[] )
 	}
 	
 	return( 0 );
-	
-} /* main */
+}

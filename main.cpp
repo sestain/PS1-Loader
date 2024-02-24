@@ -107,6 +107,12 @@ u_long ot[2][OTLEN];    // Ordering table length
 char pribuff[2][32768]; // Primitive buffer
 char* nextpri;          // Next primitive pointer
 
+struct GameInfo {
+    const char* name;
+    const char* serial;
+    int buttonMask;
+};
+
 // Pad stuff (omit when using PSn00bSDK)
 #define PAD_SELECT      1
 #define PAD_L3          2
@@ -129,14 +135,14 @@ char* nextpri;          // Next primitive pointer
 u_char padbuff[2][34];
 
 // Init function
-void init(void) {
+void init() {
 	// This not only resets the GPU but it also installs the library's
 	// ISR subsystem to the kernel
 	ResetGraph(0);
 	CdInit();
 
-	SetDefDispEnv( &disp, 0, 0, 320, 240 );
-	SetDefDrawEnv( &draw, 0, 0, 320, 240 );
+	SetDefDispEnv( &disp, 0, 0, 512, 224 );
+	SetDefDrawEnv( &draw, 0, 0, 512, 224 );
 
 	// Set and enable clear color
 	setRGB0( &draw, 0, 0, 0 );
@@ -154,7 +160,7 @@ void init(void) {
 	FntLoad(960, 0);
 
 	// Open up a test font text stream
-	FntOpen(0, 8, 320, 224, 0, 200);
+	FntOpen(0, 8, 512, 224, 0, 200);
 
 	// Initialize the pads
 	InitPAD(padbuff[0], 34, padbuff[1], 34);
@@ -167,7 +173,7 @@ void init(void) {
 }
 
 // Display function
-void display(void) {
+void display() {
 	// Flip buffer index
 	db = !db;
 	nextpri = pribuff[db];      // Reset next primitive pointer
@@ -187,71 +193,59 @@ void display(void) {
 	SetDispMask(1);
 }
 
-int main( int argc, const char *argv[] ) {
-	const char* filename = "none";
-	const char* game = "none";
-	int executing = 0;
+int main() {
+	const GameInfo gameInfos[] = {
+	    {"Crash 1", "\\LOADS\\CRASH1.EXE;1", PAD_CROSS},
+	    {"Crash 2", "\\LOADS\\CRASH2.EXE;1", PAD_CIRCLE},
+	    {"Crash 3", "\\LOADS\\CRASH3.EXE;1", PAD_TRIANGLE},
+	    {"Crash Bash", "\\LOADS\\BASH.EXE;1", PAD_SQUARE}
+	};
 
+	const char* filename = "none";
+	const char* gamename = "none";
+	int executing = 0;
+	
 	init();
 	
 	while( 1 )
 	{
 		if (executing == 1) {
-			executing = 2;
-			if (launchExecutable(filename, 5) == true)
-				executing = 3; // executed
-			else
-				executing = 4; // failed
+			launchExecutable(filename, 5);
+			executing = 2; // if failed (usually unreachable)
 		}
 
 		FntPrint(-1, "Welcome to Sestain's bootleg loader\n\n");
-
-		FntPrint(-1, "Selected: %s\n", game);
-
+		FntPrint(-1, "Selected: %s\n", gamename);
 		FntPrint(-1, "Press start to boot game\n");
 
 		PADTYPE* pad = (PADTYPE*)padbuff[0];
 
-		// Only parse inputs when a controller is connected
-		if (pad->stat == 0)
-		{
-			// Only parse when a digital pad, 
-			// dual-analog and dual-shock is connected
-			if ((pad->type == 0x4) ||
-				(pad->type == 0x5) ||
-				(pad->type == 0x7))
-			{
-				if (!(pad->btn & PAD_CROSS))
-				{
-					game = "Crash 1";
-					filename = "\\LOADS\\CRASH1.EXE;1";
-				}
-				if (!(pad->btn & PAD_CIRCLE))
-				{
-					game = "Crash 2";
-					filename = "\\LOADS\\CRASH2.EXE;1";
-				}
-				if (!(pad->btn & PAD_TRIANGLE))
-				{
-					game = "Crash 3";
-					filename = "\\LOADS\\CRASH3.EXE;1";
-				}
-				if (!(pad->btn & PAD_SQUARE))
-				{
-					game = "Crash Bash";
-					filename = "\\LOADS\\BASH.EXE;1";
-				}
-
-				if (!(pad->btn & PAD_START)) {
-					if (!(filename == "none") && !(executing == 2)) {
-						executing = 1;
-					}
-				}
-			}
-		}
+    	// Only parse inputs when a controller is connected
+    	if (pad->stat == 0) {
+    	    // Only parse when a digital pad,
+    	    // dual-analog and dual-shock is connected
+    	    if ((pad->type == 0x4) ||
+    	        (pad->type == 0x5) ||
+    	        (pad->type == 0x7)) {
+				
+    	        for (size_t i = 0; i < sizeof(gameInfos) / sizeof(gameInfos[0]); ++i) {
+    	            if (!(pad->btn & gameInfos[i].buttonMask)) {
+    	                gamename = gameInfos[i].name;
+    	                filename = gameInfos[i].serial;
+    	            }
+    	        }
+	
+    	        if (!(pad->btn & PAD_START) && (strcmp(gamename, "none") != 0) && !executing) {
+    	            executing = 1;
+    	        }
+    	    }
+    	}
 		
 		if (executing > 0)
-			FntPrint(-1, "Executing: %s\n", game);
+			FntPrint(-1, "Executing: %s\n", gamename);
+
+		if (executing == 2)
+			FntPrint(-1, "Error\n");
 
 		// Draw the last created text stream
 		FntFlush(-1);
@@ -260,5 +254,5 @@ int main( int argc, const char *argv[] ) {
 		display();
 	}
 	
-	return( 0 );
+	return 0;
 }

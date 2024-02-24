@@ -46,6 +46,8 @@
 			License files are region-specific and are not distributed with
 			PSn00bSDK for obvious reasons, but can be dumped from an official
 			game using dumpsxiso or extracted from the Sony SDK.
+
+			PAL lisence is used for compatibility on PS2 fat models.
 		-->
 		<license file="${PROJECT_SOURCE_DIR}/licensee.dat" />
 
@@ -62,7 +64,7 @@
 			contain any number of files.
 		-->
 		<directory_tree>
-			<file name="SYSTEM.CNF"		type="data" source="${PROJECT_SOURCE_DIR}/system.cnf" />
+			<file name="SYSTEM.CNF"		type="data" source="${PROJECT_SOURCE_DIR}/SYSTEM.CNF" />
 			<file name="LOADER.EXE"		type="data" source="cppdemo.exe" />
 			
 			<dir name="LOADS">

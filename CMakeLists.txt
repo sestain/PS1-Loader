@@ -8,7 +8,7 @@ project(
 	LANGUAGES    CXX
 	VERSION      1.0.0
 	DESCRIPTION  "Random bootleg loader that maybe works"
-	HOMEPAGE_URL "http://lameguy64.net/?page=psn00bsdk"
+	HOMEPAGE_URL "https://github.com/sestain/PS1-Loader"
 )
 
 file(GLOB _sources *.cpp)

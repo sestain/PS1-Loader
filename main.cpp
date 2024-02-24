@@ -140,21 +140,35 @@ void init() {
 	// ISR subsystem to the kernel
 	ResetGraph(0);
 	CdInit();
-
-	SetDefDispEnv( &disp, 0, 0, 512, 224 );
-	SetDefDrawEnv( &draw, 0, 0, 512, 224 );
+	
+	if( !GetVideoMode() ) {
+		SetDefDispEnv( &disp, 0, 0, 512, 224 );
+		SetDefDrawEnv( &draw, 0, 0, 512, 224 );
+		//disp.screen.x = 10;
+		//disp.screen.y = 10;
+		disp.screen.h = 224;
+		printf("NTSC System.\n");
+	} else {
+		SetDefDispEnv( &disp, 0, 0, 512, 256 );
+		SetDefDrawEnv( &draw, 0, 0, 512, 256 );
+		disp.screen.x = 10;
+		disp.screen.y = 10;
+		disp.screen.h = 256;
+		printf("PAL System.\n");
+	}
 
 	// Set and enable clear color
 	setRGB0( &draw, 0, 0, 0 );
 	draw.isbg = 1;
-	draw.dtd = 1;
-
-	// Clear double buffer counter
-	nextpri = pribuff[0];           // Set initial primitive pointer address
 
 	// Apply the GPU environments
 	PutDispEnv( &disp );
 	PutDrawEnv( &draw );
+
+	ClearOTagR( ot[0], OTLEN );
+	ClearOTagR( ot[1], OTLEN );
+	// Clear double buffer counter
+	nextpri = pribuff[0];           // Set initial primitive pointer address
 
 	// Load test font
 	FntLoad(960, 0);
@@ -174,20 +188,18 @@ void init() {
 
 // Display function
 void display() {
-	// Flip buffer index
-	db = !db;
-	nextpri = pribuff[db];      // Reset next primitive pointer
-
 	// Wait for all drawing to complete
 	DrawSync(0);
-
 	// Wait for vertical sync to cap the logic to 60fps (or 50 in PAL mode)
 	// and prevent screen tearing
 	VSync(0);
 
-	// Switch pages	
-	PutDispEnv(&disp);
-	PutDrawEnv(&draw);
+	PutDrawEnv( &draw );
+	DrawOTag( ot[db]+OTLEN-1 );
+
+	db ^= 1;
+	ClearOTagR( ot[db], OTLEN );
+	nextpri = pribuff[db];
 
 	// Enable display output, ResetGraph() disables it by default
 	SetDispMask(1);

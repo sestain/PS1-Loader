@@ -3,8 +3,8 @@
 ## Description
 
 - I wanted to recreate a bootleg crash ps1 collection (that uses modern SDK - [PSn00bSDK](https://github.com/Lameguy64/PSn00bSDK)).
-- Tested on PCSX-Redux (13075.20230113.7.x64 - 2023-01-13 10:45:48) and Duckstation 0.1-5477-gb5f806a8 (dev).
-- Tested on SCPH-50004 and SCPH-90004 (both mechapwn'd) (bin file was patched with filepatcher so console thinks it's a PAL game with an NTSC-U license)
+- Tested on PCSX-Redux (18059.20240224.7.x64 - 2024-02-24 19:02:19) and Duckstation 0.1-6292-g0bc42c38 (dev).
+- Tested on SCPH-50004, SCPH-77004 and SCPH-90004 (all mechapwn'd) (iso.xml specifies a PAL license so it works on fat models. You can extract the license file out of an original game dump.)
 
 ## Compiling and usage
 

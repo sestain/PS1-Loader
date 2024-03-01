@@ -29,7 +29,7 @@ struct ExeHeader {
 
 extern const uint8_t __text_start[], _end[];
 
-bool launchExecutable(const char *path, int maxAttempts) {
+bool launchExecutable(const char *path, const int maxAttempts) {
 	CdlFILE file;
 	ExeHeader header;
 
@@ -98,19 +98,19 @@ bool launchExecutable(const char *path, int maxAttempts) {
 // Define display/draw environments for double buffering
 DISPENV disp;
 DRAWENV draw;
-int db = 0;
+int db{ 0 };
 
 #define OTLEN 8         // Ordering table length (recommended to set as a define so it can be changed easily)
 
 // Define variables for controllers
 u_long ot[2][OTLEN];    // Ordering table length
 char pribuff[2][32768]; // Primitive buffer
-char* nextpri;          // Next primitive pointer
+const char* nextpri;          // Next primitive pointer
 
 struct GameInfo {
     const char* name;
     const char* serial;
-    int buttonMask;
+    const int buttonMask;
 };
 
 // Pad stuff (omit when using PSn00bSDK)
@@ -213,9 +213,9 @@ int main() {
 	    {"Crash Bash", "\\LOADS\\BASH.EXE;1", PAD_SQUARE}
 	};
 
-	const char* filename = "none";
-	const char* gamename = "none";
-	int executing = 0;
+	const char* filename{ "none" };
+	const char* gamename{ "none" };
+	int executing{ 0 };
 	
 	init();
 	
